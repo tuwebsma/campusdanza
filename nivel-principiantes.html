@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Principiantes — Campus Danza Bariloche</title>
+  <meta name="description" content="Nivel Principiantes de Campus Danza Bariloche. Formación inicial en ballet y danza. Enero 2027." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { padding-top: 64px; }
+
+    /* ── Level Hero ── */
+    .level-hero {
+      position: relative;
+      min-height: clamp(300px, 45vh, 520px);
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background-color: var(--color-warm-gray-200);
+    }
+
+    .level-hero__bg-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(150deg, #d8cfc4 0%, #c0b0a0 50%, #a8978a 100%);
+    }
+
+    .level-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+
+    .level-hero__content {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-16) var(--gutter);
+      width: 100%;
+    }
+
+    .level-hero__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: var(--space-4);
+    }
+
+    .level-hero__breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .level-hero__breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+
+    .level-hero__num {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(255,255,255,0.12);
+      position: absolute;
+      right: var(--gutter);
+      bottom: var(--space-6);
+      letter-spacing: -0.04em;
+      pointer-events: none;
+    }
+
+    .level-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--color-white);
+    }
+
+    /* ── Content ── */
+    .level-content {
+      padding-block: var(--section-gap);
+    }
+
+    .level-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    .level-image {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-warm-gray-100);
+      aspect-ratio: 3/4;
+    }
+
+    .level-image img,
+    .level-image .img-placeholder {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .level-body {}
+
+    .level-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-400);
+      margin-bottom: var(--space-3);
+    }
+
+    .level-title-body {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+      font-weight: 300;
+      letter-spacing: -0.015em;
+      line-height: 1.05;
+      color: var(--color-ink);
+      margin-bottom: var(--space-6);
+    }
+
+    .level-text {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--color-warm-gray-500);
+      margin-bottom: var(--space-6);
+    }
+
+    /* Pricing */
+    .pricing-block {
+      margin-top: var(--space-10);
+      padding: var(--space-8);
+      background-color: var(--color-warm-gray-100);
+      border-top: 2px solid var(--color-warm-gray-300);
+    }
+
+    .pricing-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-500);
+      margin-bottom: var(--space-5);
+    }
+
+    .pricing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: var(--space-3) 0;
+      border-bottom: var(--border-thin);
+    }
+
+    .pricing-row:last-child { border-bottom: none; }
+
+    .pricing-item {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-warm-gray-600);
+    }
+
+    .pricing-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-ink);
+    }
+
+    .pricing-note {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      color: var(--color-warm-gray-400);
+      margin-top: var(--space-4);
+      font-style: italic;
+    }
+
+    /* Includes */
+    .includes-block {
+      margin-top: var(--space-8);
+    }
+
+    .includes-title {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-500);
+      margin-bottom: var(--space-4);
+    }
+
+    .includes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .includes-list li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-warm-gray-600);
+    }
+
+    .includes-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 16px;
+      height: 1px;
+      background-color: var(--color-warm-gray-400);
+    }
+
+    /* CTA */
+    .level-cta {
+      margin-top: var(--space-10);
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      flex-wrap: wrap;
+    }
+
+    .form-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 400;
+      color: var(--color-warm-gray-400);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .level-layout { grid-template-columns: 1fr; }
+      .level-image { aspect-ratio: 16/9; }
+    }
+  </style>
+</head>
+<body class="page-enter">
+
+  <!-- ───── NAV ───── -->
+  <nav class="campus-nav" role="navigation" aria-label="Navegación Campus Danza">
+    <div class="campus-nav__inner">
+      <a href="campus-danza.html" class="campus-nav__logo">
+        Campus Danza
+        <small>Bariloche</small>
+      </a>
+      <div class="campus-nav__links">
+        <a href="campus-danza.html#inicio" class="campus-nav__link">Inicio</a>
+        <a href="campus-danza.html#profesores" class="campus-nav__link">Profesores</a>
+        <a href="campus-danza.html#alojamiento" class="campus-nav__link">Alojamiento</a>
+        <a href="campus-danza.html#formularios" class="campus-nav__link active">Formularios</a>
+        <a href="campus-danza.html#becas" class="campus-nav__link">Becas</a>
+        <a href="campus-danza.html#faq" class="campus-nav__link">Preguntas frecuentes</a>
+        <a href="campus-danza.html#contacto" class="campus-nav__link">Contacto</a>
+      </div>
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-nav" aria-hidden="true">
+    <a href="campus-danza.html#inicio" class="mobile-menu__link">Inicio</a>
+    <a href="campus-danza.html#profesores" class="mobile-menu__link">Profesores</a>
+    <a href="campus-danza.html#alojamiento" class="mobile-menu__link">Alojamiento</a>
+    <a href="campus-danza.html#formularios" class="mobile-menu__link">Formularios</a>
+    <a href="campus-danza.html#becas" class="mobile-menu__link">Becas</a>
+    <a href="campus-danza.html#faq" class="mobile-menu__link">Preguntas frecuentes</a>
+    <a href="campus-danza.html#contacto" class="mobile-menu__link">Contacto</a>
+  </div>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="level-hero" aria-label="Nivel Principiantes">
+      <div class="level-hero__bg-placeholder" aria-hidden="true"></div>
+      <!-- <img src="img/nivel-principiantes.jpg" alt="Nivel Principiantes" class="level-hero__bg" /> -->
+      <div class="level-hero__overlay" aria-hidden="true"></div>
+      <div class="level-hero__content">
+        <nav class="level-hero__breadcrumb" aria-label="Navegación de migas">
+          <a href="index.html">Inicio</a>
+          <span aria-hidden="true">·</span>
+          <a href="campus-danza.html#formularios">Formularios</a>
+          <span aria-hidden="true">·</span>
+          <span>Principiantes</span>
+        </nav>
+        <h1 class="level-hero__title">Principiantes</h1>
+      </div>
+      <span class="level-hero__num" aria-hidden="true">01</span>
+    </section>
+
+    <!-- Content -->
+    <section class="level-content">
+      <div class="container">
+        <div class="level-layout">
+
+          <!-- Image -->
+          <div class="level-image">
+            <!-- <img src="img/nivel-principiantes-detalle.jpg" alt="Nivel Principiantes — Campus Danza" loading="lazy" /> -->
+            <div class="img-placeholder"><span class="placeholder-label">Imagen<br>pendiente</span></div>
+          </div>
+
+          <!-- Body -->
+          <div class="level-body">
+
+            <p class="level-label">Nivel 01 · Campus Danza 2027</p>
+            <h2 class="level-title-body">Formación inicial<br>en danza</h2>
+
+            <p class="level-text">
+              El nivel Principiantes está diseñado para estudiantes que se inician en la danza o que buscan consolidar las bases técnicas de su formación. Un espacio de aprendizaje progresivo, con atención personalizada y un enfoque integral del movimiento.
+            </p>
+
+            <p class="level-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. La descripción completa de la propuesta pedagógica se publicará próximamente.
+            </p>
+
+            <!-- Includes -->
+            <div class="includes-block">
+              <p class="includes-title">¿Qué incluye?</p>
+              <ul class="includes-list">
+                <li>Clases diarias de técnica [a confirmar]</li>
+                <li>Alojamiento en el Camping Musical Bariloche [a confirmar]</li>
+                <li>Alimentación [a confirmar]</li>
+                <li>Materiales de trabajo [a confirmar]</li>
+                <li>Actividades complementarias [a confirmar]</li>
+              </ul>
+            </div>
+
+            <!-- Pricing -->
+            <div class="pricing-block" id="precios-principiantes">
+              <p class="pricing-label">Precios orientativos</p>
+
+              <div class="pricing-row">
+                <span class="pricing-item">Inscripción temprana</span>
+                <span class="pricing-value">[Precio a confirmar]</span>
+              </div>
+              <div class="pricing-row">
+                <span class="pricing-item">Inscripción general</span>
+                <span class="pricing-value">[Precio a confirmar]</span>
+              </div>
+              <div class="pricing-row">
+                <span class="pricing-item">Con beca parcial</span>
+                <span class="pricing-value">[Precio a confirmar]</span>
+              </div>
+
+              <p class="pricing-note">
+                Los precios son provisionales. Los importes definitivos se publicarán cuando estén confirmados. Estos valores no representan precios oficiales actuales.
+              </p>
+            </div>
+
+            <!-- CTA -->
+            <div class="level-cta">
+              <a
+                href="https://forms.gle/ZX8gVoBoCL851Rav6"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-dark"
+                id="cta-inscripcion-principiantes"
+              >Formulario de inscripción</a>
+              <a
+                href="https://drive.google.com/file/d/1b5w_kYutDmStNfDMB-sYiDZEKo-eMud9/view?usp=drivesdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-arrow"
+                id="cta-info-principiantes"
+              >
+                Ver info 2027
+                <span class="arrow"></span>
+              </a>
+            </div>
+
+            <p class="form-soon" style="margin-top: var(--space-4);">
+              El formulario oficial de inscripción estará disponible cuando se confirmen los detalles de la edición 2027.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to formularios -->
+    <section style="padding: var(--space-12) var(--gutter); background-color: var(--color-white); border-top: var(--border-thin);">
+      <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--space-4);">
+        <a href="campus-danza.html#formularios" class="btn-arrow" style="color: var(--color-warm-gray-500);">
+          <span class="arrow" style="transform:rotate(180deg);"></span>
+          Volver a Formularios
+        </a>
+        <a href="nivel-avanzado.html" class="btn-arrow" id="link-to-avanzado">
+          Ver nivel Avanzado
+          <span class="arrow"></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-logo">Campus Danza<br>Bariloche</p>
+          <p class="footer-tagline">Residencia internacional de ballet y danza. Enero 2027. Bariloche, Patagonia Argentina.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/campus_danza_bariloche/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C9.29 2 8.94 2 7.87 2.06 7.04 2.07 6.22 2.23 5.44 2.52 4.79 2.78 4.23 3.12 3.67 3.68 3.12 4.23 2.77 4.79 2.52 5.45 2.27 6.09 2.1 6.81 2.06 7.88 2.01 8.94 2 9.28 2 12c0 2.71 0 3.05.06 4.12.04 1.07.22 1.81.46 2.44.26.66.6 1.21 1.15 1.77.56.56 1.11.89 1.77 1.14.63.25 1.35.42 2.42.46C8.94 22 9.28 22 12 22c2.71 0 3.05 0 4.12-.06 1.06-.04 1.79-.21 2.42-.46.67-.25 1.21-.58 1.77-1.14.56-.56.89-1.11 1.14-1.77.25-.63.42-1.37.46-2.44C22 15.05 22 14.71 22 12c0-2.71 0-3.06-.06-4.12-.04-1.07-.21-1.79-.46-2.42-.25-.66-.58-1.22-1.14-1.77-.56-.56-1.1-.89-1.77-1.14-.63-.25-1.36-.42-2.42-.46C15.05 2 14.71 2 12 2zm-1.1 1.81H12c2.66 0 2.98.01 4.03.06.63.01 1.26.13 1.85.34.45.18.77.39 1.1.72.34.34.54.66.72 1.1.21.6.33 1.22.34 1.86.05 1.05.06 1.37.06 4.02 0 2.66-.01 2.98-.06 4.04-.01.63-.13 1.26-.34 1.85-.18.45-.38.77-.72 1.1-.33.34-.65.54-1.1.72-.59.21-1.22.33-1.85.34-1.05.05-1.37.06-4.03.06-2.67 0-2.98-.01-4.04-.06-.63-.01-1.26-.13-1.85-.34-.47-.18-.79-.38-1.1-.72-.34-.33-.55-.65-.72-1.1-.21-.59-.33-1.22-.34-1.85-.05-1.06-.06-1.38-.06-4.04 0-2.67.01-2.98.06-4.03.01-.64.13-1.26.34-1.86.18-.44.38-.77.72-1.1.31-.33.63-.54 1.1-.72.6-.21 1.22-.33 1.85-.34.88-.05 1.24-.06 3.09-.06v.01zm6.28 1.66a1.19 1.19 0 100 2.39 1.19 1.19 0 000-2.39zM12 6.86a5.14 5.14 0 100 10.28A5.14 5.14 0 0012 6.86zm0 1.81a3.33 3.33 0 110 6.66 3.33 3.33 0 010-6.66z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-heading">Campus Danza</p>
+          <nav class="footer-links">
+            <a href="campus-danza.html#inicio" class="footer-link">Inicio</a>
+            <a href="campus-danza.html#profesores" class="footer-link">Profesores</a>
+            <a href="campus-danza.html#alojamiento" class="footer-link">Alojamiento</a>
+            <a href="campus-danza.html#formularios" class="footer-link">Formularios</a>
+            <a href="campus-danza.html#contacto" class="footer-link">Contacto</a>
+          </nav>
+        </div>
+        <div>
+          <p class="footer-heading">Niveles</p>
+          <nav class="footer-links">
+            <a href="nivel-principiantes.html" class="footer-link" style="color:var(--color-white);">Principiantes</a>
+            <a href="nivel-avanzado.html" class="footer-link">Avanzado</a>
+            <a href="index.html" class="footer-link" style="margin-top:var(--space-4);">← Inicio</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2027 Campus Danza Bariloche. Todos los derechos reservados.</p>
+        <p class="footer-location"><a href="https://maps.app.goo.gl/dXdB7FZggPeKBHQ77" target="_blank" rel="noopener noreferrer">Camping Musical Bariloche · Patagonia Argentina</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.contains('open');
+      hamburger.classList.toggle('active', !isOpen);
+      hamburger.setAttribute('aria-expanded', String(!isOpen));
+      mobileNav.classList.toggle('open', !isOpen);
+      mobileNav.setAttribute('aria-hidden', String(isOpen));
+      document.body.style.overflow = !isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('.mobile-menu__link').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }));
+  </script>
+
+</body>
+</html>

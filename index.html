@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Danza Bariloche — Residencia Internacional de Ballet y Danza</title>
+    <meta name="description"
+        content="Campus Danza Bariloche es una residencia internacional de ballet y danza en la Patagonia argentina. Próxima edición: Enero 2027." />
+    <meta property="og:title" content="Campus Danza Bariloche" />
+    <meta property="og:description"
+        content="Residencia internacional de ballet y danza. Próxima edición: Enero 2027. En Bariloche, Argentina." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* ── Home-specific styles ── */
+
+        body {
+            background-color: var(--color-off-white);
+        }
+
+        /* Hero Section */
+        .home-hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 0;
+        }
+
+        .home-brand {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-6) var(--gutter);
+            mix-blend-mode: multiply;
+        }
+
+        .home-brand__name {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-ink);
+        }
+
+        .home-brand__instagram {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-warm-gray-600);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .home-brand__instagram:hover {
+            color: var(--color-ink);
+        }
+
+        /* Main Cards Container */
+        .main-cards {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-24) var(--gutter) 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        /* Large Navigation Card */
+        .main-nav-card {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: clamp(280px, 38vw, 480px);
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: var(--color-warm-gray-200);
+        }
+
+        .main-nav-card__bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .main-nav-card__bg-placeholder {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .main-nav-card__bg-placeholder.danza {
+            background: linear-gradient(135deg,
+                    #d4cbc0 0%,
+                    #c2b5a5 30%,
+                    #b0a090 60%,
+                    #9e8e7e 100%);
+        }
+
+        .main-nav-card__bg-placeholder.gira {
+            background: linear-gradient(135deg,
+                    #cdd4cc 0%,
+                    #b8c2b5 30%,
+                    #a5b0a0 60%,
+                    #909e8e 100%);
+        }
+
+        .main-nav-card__vignette {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.35) 0%,
+                    rgba(0, 0, 0, 0.08) 50%,
+                    rgba(0, 0, 0, 0.12) 100%);
+            transition: opacity 0.4s ease;
+        }
+
+        .main-nav-card:hover .main-nav-card__vignette {
+            opacity: 0.7;
+        }
+
+        .main-nav-card:hover .main-nav-card__bg,
+        .main-nav-card:hover .main-nav-card__bg-placeholder {
+            transform: scale(1.04);
+        }
+
+        .main-nav-card__inner {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: var(--space-8) var(--space-10);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .main-nav-card__top {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .main-nav-card__sup {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .main-nav-card__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--color-white);
+        }
+
+        .main-nav-card__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease, gap 0.3s ease;
+            width: fit-content;
+        }
+
+        .main-nav-card:hover .main-nav-card__cta {
+            color: rgba(255, 255, 255, 1);
+            gap: var(--space-5);
+        }
+
+        .cta-line {
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background-color: currentColor;
+            position: relative;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav-card:hover .cta-line {
+            width: 40px;
+        }
+
+        .cta-line::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -3px;
+            width: 6px;
+            height: 6px;
+            border-right: 1px solid currentColor;
+            border-top: 1px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        /* Secondary Tiles */
+        .secondary-tiles {
+            width: 100%;
+            max-width: 900px;
+            margin: var(--space-3) auto 0;
+            padding-inline: var(--gutter);
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-2);
+        }
+
+        .sec-tile {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-5) var(--space-5);
+            background-color: var(--color-warm-gray-100);
+            border: var(--border-thin);
+            cursor: pointer;
+            transition: background-color var(--transition-base), border-color var(--transition-base);
+            overflow: hidden;
+            text-decoration: none;
+            min-height: 100px;
+        }
+
+        .sec-tile::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: var(--color-warm-gray-200);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .sec-tile:hover {
+            background-color: var(--color-white);
+            border-color: var(--color-warm-gray-300);
+        }
+
+        .sec-tile:hover::after {
+            opacity: 1;
+        }
+
+        .sec-tile__num {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 400;
+            color: var(--color-warm-gray-400);
+        }
+
+        .sec-tile__label {
+            font-family: var(--font-display);
+            font-size: clamp(var(--text-lg), 2vw, var(--text-xl));
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            color: var(--color-ink);
+            line-height: 1.1;
+        }
+
+        /* Scroll Indicator */
+        .scroll-hint {
+            text-align: center;
+            padding: var(--space-6) 0 var(--space-4);
+            max-width: 900px;
+            margin: 0 auto;
+            padding-inline: var(--gutter);
+        }
+
+        .scroll-hint p {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-warm-gray-400);
+        }
+
+        /* ── HOME FOOTER ── */
+
+        .home-footer-section {
+            background-color: var(--color-off-white);
+            border-top: var(--border-thin);
+        }
+
+        /* ── RESPONSIVE ── */
+
+        @media (max-width: 768px) {
+            .main-cards {
+                padding-top: var(--space-20);
+            }
+
+            .main-nav-card__inner {
+                padding: var(--space-6) var(--space-6);
+            }
+
+            .tiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-nav-card {
+                height: clamp(240px, 55vw, 320px);
+            }
+
+            .tiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sec-tile {
+                min-height: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ───── TOPBAR ───── -->
+    <header class="home-brand" role="banner">
+        <span class="home-brand__name">Campus Danza Bariloche</span>
+        <a href="https://www.instagram.com/campus_danza_bariloche/" target="_blank" rel="noopener noreferrer"
+            class="home-brand__instagram" aria-label="Seguinos en Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                    d="M12 2C9.29 2 8.94 2 7.87 2.06 7.04 2.07 6.22 2.23 5.44 2.52 4.79 2.78 4.23 3.12 3.67 3.68 3.12 4.23 2.77 4.79 2.52 5.45 2.27 6.09 2.1 6.81 2.06 7.88 2.01 8.94 2 9.28 2 12c0 2.71 0 3.05.06 4.12.04 1.07.22 1.81.46 2.44.26.66.6 1.21 1.15 1.77.56.56 1.11.89 1.77 1.14.63.25 1.35.42 2.42.46C8.94 22 9.28 22 12 22c2.71 0 3.05 0 4.12-.06 1.06-.04 1.79-.21 2.42-.46.67-.25 1.21-.58 1.77-1.14.56-.56.89-1.11 1.14-1.77.25-.63.42-1.37.46-2.44C22 15.05 22 14.71 22 12c0-2.71 0-3.06-.06-4.12-.04-1.07-.21-1.79-.46-2.42-.25-.66-.58-1.22-1.14-1.77-.56-.56-1.1-.89-1.77-1.14-.63-.25-1.36-.42-2.42-.46C15.05 2 14.71 2 12 2zm-1.1 1.81H12c2.66 0 2.98.01 4.03.06.63.01 1.26.13 1.85.34.45.18.77.39 1.1.72.34.34.54.66.72 1.1.21.6.33 1.22.34 1.86.05 1.05.06 1.37.06 4.02 0 2.66-.01 2.98-.06 4.04-.01.63-.13 1.26-.34 1.85-.18.45-.38.77-.72 1.1-.33.34-.65.54-1.1.72-.59.21-1.22.33-1.85.34-1.05.05-1.37.06-4.03.06-2.67 0-2.98-.01-4.04-.06-.63-.01-1.26-.13-1.85-.34-.47-.18-.79-.38-1.1-.72-.34-.33-.55-.65-.72-1.1-.21-.59-.33-1.22-.34-1.85-.05-1.06-.06-1.38-.06-4.04 0-2.67.01-2.98.06-4.03.01-.64.13-1.26.34-1.86.18-.44.38-.77.72-1.1.31-.33.63-.54 1.1-.72.6-.21 1.22-.33 1.85-.34.88-.05 1.24-.06 3.09-.06v.01zm6.28 1.66a1.19 1.19 0 100 2.39 1.19 1.19 0 000-2.39zM12 6.86a5.14 5.14 0 100 10.28A5.14 5.14 0 0012 6.86zm0 1.81a3.33 3.33 0 110 6.66 3.33 3.33 0 010-6.66z" />
+            </svg>
+            @campus_danza_bariloche
+        </a>
+    </header>
+
+    <!-- ───── MAIN: LARGE NAVIGATION CARDS ───── -->
+    <main id="main-content">
+
+        <section class="home-hero" aria-label="Acceso principal">
+
+            <div class="main-cards" id="acceso-principal">
+
+                <!-- Card 1: Campus Danza -->
+                <a href="campus-danza.html" class="main-nav-card" id="card-campus-danza" aria-label="Ir a Campus Danza">
+                    <!-- Placeholder para imagen (reemplazar src cuando esté disponible) -->
+                    <div class="main-nav-card__bg-placeholder danza" aria-hidden="true"></div>
+                    <!-- <img src="img/campus-danza-hero.jpg" alt="Campus Danza Bariloche" class="main-nav-card__bg" /> -->
+                    <div class="main-nav-card__vignette" aria-hidden="true"></div>
+                    <div class="main-nav-card__inner">
+                        <div class="main-nav-card__top">
+                            <span class="main-nav-card__sup">Formación · Perfeccionamiento</span>
+                            <h2 class="main-nav-card__title">Campus<br>Danza</h2>
+                        </div>
+                        <span class="main-nav-card__cta" aria-hidden="true">
+                            Explorar
+                            <span class="cta-line"></span>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Campus en Gira -->
+                <a href="campus-en-gira.html" class="main-nav-card" id="card-campus-gira"
+                    aria-label="Ir a Campus en Gira">
+                    <div class="main-nav-card__bg-placeholder gira" aria-hidden="true"></div>
+                    <!-- <img src="img/campus-gira-hero.jpg" alt="Campus en Gira" class="main-nav-card__bg" /> -->
+                    <div class="main-nav-card__vignette" aria-hidden="true"></div>
+                    <div class="main-nav-card__inner">
+                        <div class="main-nav-card__top">
+                            <span class="main-nav-card__sup">Residencia itinerante</span>
+                            <h2 class="main-nav-card__title">Campus<br>en Gira</h2>
+                        </div>
+                        <span class="main-nav-card__cta" aria-hidden="true">
+                            Explorar
+                            <span class="cta-line"></span>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Secondary Tiles -->
+            <div class="secondary-tiles">
+                <nav class="tiles-grid" aria-label="Accesos secundarios">
+
+                    <a href="coordinadoras.html" class="sec-tile" id="tile-coordinadoras"
+                        aria-label="Ir a Coordinadoras">
+                        <span class="sec-tile__num" aria-hidden="true">01</span>
+                        <span class="sec-tile__label">Coordinadoras</span>
+                    </a>
+
+                    <span class="sec-tile" id="tile-experiencia" aria-label="Experiencia — próximamente"
+                        style="cursor:default;">
+                        <span class="sec-tile__num" aria-hidden="true">02</span>
+                        <span class="sec-tile__label">Experiencia</span>
+                    </span>
+
+                    <span class="sec-tile" id="tile-informacion" aria-label="Información — próximamente"
+                        style="cursor:default;">
+                        <span class="sec-tile__num" aria-hidden="true">03</span>
+                        <span class="sec-tile__label">Información</span>
+                    </span>
+
+                    <span class="sec-tile" id="tile-novedades" aria-label="Novedades — próximamente"
+                        style="cursor:default;">
+                        <span class="sec-tile__num" aria-hidden="true">04</span>
+                        <span class="sec-tile__label">Novedades</span>
+                    </span>
+
+                </nav>
+            </div>
+
+            <div class="scroll-hint" aria-hidden="true">
+                <p>Bariloche · Argentina · Enero 2027</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ───── FOOTER ───── -->
+    <footer class="site-footer home-footer-section" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+
+                <!-- Col 1: Marca + redes -->
+                <div>
+                    <p class="footer-logo">Campus Danza<br>Bariloche</p>
+                    <p class="footer-tagline">Residencia internacional de ballet y danza. Próxima edición: Enero 2027.
+                        Bariloche, Patagonia Argentina.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/campus_danza_bariloche/" target="_blank"
+                            rel="noopener noreferrer" class="footer-social-link"
+                            aria-label="Instagram Campus Danza Bariloche">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M12 2C9.29 2 8.94 2 7.87 2.06 7.04 2.07 6.22 2.23 5.44 2.52 4.79 2.78 4.23 3.12 3.67 3.68 3.12 4.23 2.77 4.79 2.52 5.45 2.27 6.09 2.1 6.81 2.06 7.88 2.01 8.94 2 9.28 2 12c0 2.71 0 3.05.06 4.12.04 1.07.22 1.81.46 2.44.26.66.6 1.21 1.15 1.77.56.56 1.11.89 1.77 1.14.63.25 1.35.42 2.42.46C8.94 22 9.28 22 12 22c2.71 0 3.05 0 4.12-.06 1.06-.04 1.79-.21 2.42-.46.67-.25 1.21-.58 1.77-1.14.56-.56.89-1.11 1.14-1.77.25-.63.42-1.37.46-2.44C22 15.05 22 14.71 22 12c0-2.71 0-3.06-.06-4.12-.04-1.07-.21-1.79-.46-2.42-.25-.66-.58-1.22-1.14-1.77-.56-.56-1.1-.89-1.77-1.14-.63-.25-1.36-.42-2.42-.46C15.05 2 14.71 2 12 2zm-1.1 1.81H12c2.66 0 2.98.01 4.03.06.63.01 1.26.13 1.85.34.45.18.77.39 1.1.72.34.34.54.66.72 1.1.21.6.33 1.22.34 1.86.05 1.05.06 1.37.06 4.02 0 2.66-.01 2.98-.06 4.04-.01.63-.13 1.26-.34 1.85-.18.45-.38.77-.72 1.1-.33.34-.65.54-1.1.72-.59.21-1.22.33-1.85.34-1.05.05-1.37.06-4.03.06-2.67 0-2.98-.01-4.04-.06-.63-.01-1.26-.13-1.85-.34-.47-.18-.79-.38-1.1-.72-.34-.33-.55-.65-.72-1.1-.21-.59-.33-1.22-.34-1.85-.05-1.06-.06-1.38-.06-4.04 0-2.67.01-2.98.06-4.03.01-.64.13-1.26.34-1.86.18-.44.38-.77.72-1.1.31-.33.63-.54 1.1-.72.6-.21 1.22-.33 1.85-.34.88-.05 1.24-.06 3.09-.06v.01zm6.28 1.66a1.19 1.19 0 100 2.39 1.19 1.19 0 000-2.39zM12 6.86a5.14 5.14 0 100 10.28A5.14 5.14 0 0012 6.86zm0 1.81a3.33 3.33 0 110 6.66 3.33 3.33 0 010-6.66z" />
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/@campusdanzabariloche" target="_blank" rel="noopener noreferrer"
+                            class="footer-social-link" aria-label="YouTube Campus Danza Bariloche">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M19.81 5.42A2.5 2.5 0 0018.04 3.6C16.46 3.2 12 3.2 12 3.2s-4.46 0-6.04.4A2.5 2.5 0 004.19 5.42C3.8 7 3.8 12 3.8 12s0 5 .39 6.58a2.5 2.5 0 001.77 1.77C7.54 20.8 12 20.8 12 20.8s4.46 0 6.04-.45a2.5 2.5 0 001.77-1.77C20.2 17 20.2 12 20.2 12s0-5-.39-6.58zM10 15.4V8.6l5.2 3.4-5.2 3.4z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navegación -->
+                <div>
+                    <p class="footer-heading">Navegación</p>
+                    <nav class="footer-links" aria-label="Footer navegación">
+                        <a href="campus-danza.html" class="footer-link">Campus Danza</a>
+                        <a href="campus-en-gira.html" class="footer-link">Campus en Gira</a>
+                        <a href="coordinadoras.html" class="footer-link">Coordinadoras</a>
+                        <a href="campus-danza.html#profesores" class="footer-link">Profesores</a>
+                        <a href="campus-danza.html#formularios" class="footer-link">Formularios</a>
+                        <a href="campus-danza.html#contacto" class="footer-link">Contacto</a>
+                    </nav>
+                </div>
+
+                <!-- Col 3: Sede -->
+                <div>
+                    <p class="footer-heading">Sede</p>
+                    <div class="footer-links">
+                        <p class="footer-link" style="cursor:default;">Camping Musical Bariloche</p>
+                        <a href="https://maps.app.goo.gl/dXdB7FZggPeKBHQ77" target="_blank" rel="noopener noreferrer"
+                            class="footer-link" style="text-decoration: underline; text-underline-offset: 2px;">Ver en
+                            Google Maps</a>
+                        <p class="footer-link" style="cursor:default; margin-top: var(--space-4);">Bariloche, Río
+                            Negro<br>Patagonia, Argentina</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2027 Campus Danza Bariloche. Todos los derechos reservados.</p>
+                <p class="footer-location">
+                    <a href="https://maps.app.goo.gl/dXdB7FZggPeKBHQ77" target="_blank" rel="noopener noreferrer">
+                        Camping Musical Bariloche · Patagonia Argentina
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

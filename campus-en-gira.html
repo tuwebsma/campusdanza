@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus en Gira — Campus Danza Bariloche</title>
+  <meta name="description"
+    content="Campus en Gira: la residencia itinerante de Campus Danza Bariloche. Próximamente." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: var(--color-off-white);
+    }
+
+    /* Top brand bar */
+
+
+    .gira-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-6) var(--gutter);
+      background-color: rgba(248, 246, 243, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: var(--border-thin);
+    }
+
+    .gira-topbar__logo {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    .gira-topbar__back {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-500);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .gira-topbar__back:hover {
+      color: var(--color-ink);
+    }
+
+    /* Hero */
+    .gira-hero {
+      padding-top: 64px;
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .gira-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          #ccd4cc 0%,
+          #b8c4b5 25%,
+          #a5b5a0 50%,
+          #8fa08a 75%,
+          #7b8e78 100%);
+    }
+
+    .gira-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(248, 246, 243, 0.72);
+    }
+
+    .gira-hero__content {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-24) var(--gutter);
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .gira-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-500);
+      margin-bottom: var(--space-8);
+    }
+
+    .gira-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background-color: var(--color-warm-gray-400);
+    }
+
+    .gira-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 0.92;
+      color: var(--color-ink);
+      margin-bottom: var(--space-10);
+    }
+
+    .gira-title em {
+      font-style: italic;
+      color: var(--color-warm-gray-600);
+    }
+
+    .gira-coming {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-6);
+      border: var(--border-medium);
+      background-color: rgba(255, 255, 255, 0.6);
+      margin-bottom: var(--space-10);
+    }
+
+    .gira-coming__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-warm-gray-400);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+      }
+    }
+
+    .gira-coming__text {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-warm-gray-500);
+    }
+
+    .gira-desc {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-lg), 2.5vw, var(--text-xl));
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-warm-gray-600);
+      max-width: 48ch;
+      margin-bottom: var(--space-12);
+    }
+
+    /* Placeholder sections */
+    .gira-sections {
+      padding-block: var(--section-gap);
+      background-color: var(--color-white);
+      border-top: var(--border-thin);
+    }
+
+    .gira-placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    .gira-placeholder-item {
+      padding: var(--space-8);
+      border: var(--border-thin);
+      background-color: var(--color-warm-gray-100);
+    }
+
+    .gira-placeholder-item__num {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--color-warm-gray-400);
+      margin-bottom: var(--space-4);
+    }
+
+    .gira-placeholder-item__title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 300;
+      color: var(--color-ink);
+      margin-bottom: var(--space-3);
+    }
+
+    .gira-placeholder-item__text {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-warm-gray-500);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .gira-placeholder-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-enter">
+
+  <!-- Topbar -->
+  <header class="gira-topbar" role="banner">
+    <a href="index.html" class="gira-topbar__logo" aria-label="Campus Danza Bariloche — Inicio">
+      Campus Danza Bariloche
+    </a>
+    <a href="index.html" class="gira-topbar__back" aria-label="Volver al inicio">
+      ← Inicio
+    </a>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="gira-hero" aria-label="Campus en Gira — presentación">
+      <div class="gira-hero__bg" aria-hidden="true"></div>
+      <div class="gira-hero__overlay" aria-hidden="true"></div>
+      <div class="gira-hero__content">
+
+        <p class="gira-eyebrow">Residencia itinerante</p>
+
+        <h1 class="gira-title">
+          Campus<br>
+          <em>en Gira</em>
+        </h1>
+
+        <div class="gira-coming" role="status" aria-live="polite">
+          <span class="gira-coming__dot" aria-hidden="true"></span>
+          <span class="gira-coming__text">Contenido en desarrollo · Próximamente</span>
+        </div>
+
+        <p class="gira-desc">
+          Una propuesta de formación itinerante que lleva la experiencia Campus Danza a distintos escenarios. El
+          contenido de esta sección estará disponible próximamente.
+        </p>
+
+        <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+          <a href="https://www.instagram.com/campus_danza_bariloche/" target="_blank" rel="noopener noreferrer"
+            class="btn btn-dark" id="cta-gira-instagram">Seguir en Instagram</a>
+          <a href="index.html" class="btn btn-outline" id="cta-gira-volver">Ver Campus Danza</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Placeholder sections -->
+    <section class="gira-sections" aria-label="Próximas secciones de Campus en Gira">
+      <div class="container">
+
+        <div style="margin-bottom: var(--space-12);">
+          <p
+            style="font-family: var(--font-body); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-warm-gray-400); margin-bottom: var(--space-3);">
+            En construcción</p>
+          <h2
+            style="font-family: var(--font-display); font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl)); font-weight: 300; letter-spacing: -0.015em; color: var(--color-ink);">
+            Lo que viene</h2>
+          <p
+            style="font-family: var(--font-body); font-size: var(--text-base); color: var(--color-warm-gray-500); max-width: 56ch; margin-top: var(--space-4); line-height: 1.75;">
+            Las siguientes secciones están reservadas para el contenido de Campus en Gira. Los títulos, descripciones y
+            toda la información se completarán cuando estén definidos.</p>
+        </div>
+
+        <div class="gira-placeholder-grid">
+
+          <div class="gira-placeholder-item" id="gira-placeholder-1">
+            <p class="gira-placeholder-item__num">01</p>
+            <h3 class="gira-placeholder-item__title">[Sección a definir]</h3>
+            <p class="gira-placeholder-item__text">Espacio reservado para el contenido de esta sección de Campus en
+              Gira. El título y la descripción se completarán cuando estén disponibles.</p>
+          </div>
+
+          <div class="gira-placeholder-item" id="gira-placeholder-2">
+            <p class="gira-placeholder-item__num">02</p>
+            <h3 class="gira-placeholder-item__title">[Sección a definir]</h3>
+            <p class="gira-placeholder-item__text">Espacio reservado para el contenido de esta sección de Campus en
+              Gira. El título y la descripción se completarán cuando estén disponibles.</p>
+          </div>
+
+          <div class="gira-placeholder-item" id="gira-placeholder-3">
+            <p class="gira-placeholder-item__num">03</p>
+            <h3 class="gira-placeholder-item__title">[Sección a definir]</h3>
+            <p class="gira-placeholder-item__text">Espacio reservado para el contenido de esta sección de Campus en
+              Gira. El título y la descripción se completarán cuando estén disponibles.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-logo">Campus Danza<br>Bariloche</p>
+          <p class="footer-tagline">Residencia internacional de ballet y danza. Enero 2027. Bariloche, Patagonia
+            Argentina.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/campus_danza_bariloche/" target="_blank" rel="noopener noreferrer"
+              class="footer-social-link" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                  d="M12 2C9.29 2 8.94 2 7.87 2.06 7.04 2.07 6.22 2.23 5.44 2.52 4.79 2.78 4.23 3.12 3.67 3.68 3.12 4.23 2.77 4.79 2.52 5.45 2.27 6.09 2.1 6.81 2.06 7.88 2.01 8.94 2 9.28 2 12c0 2.71 0 3.05.06 4.12.04 1.07.22 1.81.46 2.44.26.66.6 1.21 1.15 1.77.56.56 1.11.89 1.77 1.14.63.25 1.35.42 2.42.46C8.94 22 9.28 22 12 22c2.71 0 3.05 0 4.12-.06 1.06-.04 1.79-.21 2.42-.46.67-.25 1.21-.58 1.77-1.14.56-.56.89-1.11 1.14-1.77.25-.63.42-1.37.46-2.44C22 15.05 22 14.71 22 12c0-2.71 0-3.06-.06-4.12-.04-1.07-.21-1.79-.46-2.42-.25-.66-.58-1.22-1.14-1.77-.56-.56-1.1-.89-1.77-1.14-.63-.25-1.36-.42-2.42-.46C15.05 2 14.71 2 12 2zm-1.1 1.81H12c2.66 0 2.98.01 4.03.06.63.01 1.26.13 1.85.34.45.18.77.39 1.1.72.34.34.54.66.72 1.1.21.6.33 1.22.34 1.86.05 1.05.06 1.37.06 4.02 0 2.66-.01 2.98-.06 4.04-.01.63-.13 1.26-.34 1.85-.18.45-.38.77-.72 1.1-.33.34-.65.54-1.1.72-.59.21-1.22.33-1.85.34-1.05.05-1.37.06-4.03.06-2.67 0-2.98-.01-4.04-.06-.63-.01-1.26-.13-1.85-.34-.47-.18-.79-.38-1.1-.72-.34-.33-.55-.65-.72-1.1-.21-.59-.33-1.22-.34-1.85-.05-1.06-.06-1.38-.06-4.04 0-2.67.01-2.98.06-4.03.01-.64.13-1.26.34-1.86.18-.44.38-.77.72-1.1.31-.33.63-.54 1.1-.72.6-.21 1.22-.33 1.85-.34.88-.05 1.24-.06 3.09-.06v.01zm6.28 1.66a1.19 1.19 0 100 2.39 1.19 1.19 0 000-2.39zM12 6.86a5.14 5.14 0 100 10.28A5.14 5.14 0 0012 6.86zm0 1.81a3.33 3.33 0 110 6.66 3.33 3.33 0 010-6.66z" />
+              </svg>
+            </a>
+            <a href="https://youtube.com/@campusdanzabariloche" target="_blank" rel="noopener noreferrer"
+              class="footer-social-link" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                  d="M19.81 5.42A2.5 2.5 0 0018.04 3.6C16.46 3.2 12 3.2 12 3.2s-4.46 0-6.04.4A2.5 2.5 0 004.19 5.42C3.8 7 3.8 12 3.8 12s0 5 .39 6.58a2.5 2.5 0 001.77 1.77C7.54 20.8 12 20.8 12 20.8s4.46 0 6.04-.45a2.5 2.5 0 001.77-1.77C20.2 17 20.2 12 20.2 12s0-5-.39-6.58zM10 15.4V8.6l5.2 3.4-5.2 3.4z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-heading">Navegación</p>
+          <nav class="footer-links">
+            <a href="index.html" class="footer-link">Inicio</a>
+            <a href="campus-danza.html" class="footer-link">Campus Danza</a>
+            <a href="campus-en-gira.html" class="footer-link" style="color:var(--color-white);">Campus en Gira</a>
+            <a href="coordinadoras.html" class="footer-link">Coordinadoras</a>
+          </nav>
+        </div>
+        <div>
+          <p class="footer-heading">Sede</p>
+          <div class="footer-links">
+            <p class="footer-link" style="cursor:default;">Camping Musical Bariloche</p>
+            <a href="https://maps.app.goo.gl/dXdB7FZggPeKBHQ77" target="_blank" rel="noopener noreferrer"
+              class="footer-link" style="text-decoration:underline;text-underline-offset:2px;">Ver en Google Maps</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2027 Campus Danza Bariloche. Todos los derechos reservados.</p>
+        <p class="footer-location"><a href="https://maps.app.goo.gl/dXdB7FZggPeKBHQ77" target="_blank"
+            rel="noopener noreferrer">Camping Musical Bariloche · Patagonia Argentina</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
